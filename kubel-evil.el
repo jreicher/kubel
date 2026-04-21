@@ -24,7 +24,7 @@
 ;; Keywords: kubernetes k8s tools processes evil keybindings
 ;; URL: https://github.com/abrochard/kubel
 ;; License: GNU General Public License >= 3
-;; Package-Requires: ((kubel "1.0") (evil "1.0") (emacs "25.3"))
+;; Package-Requires: ((evil "1.0") (emacs "25.3"))
 
 ;;; Commentary:
 
