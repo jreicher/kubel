@@ -20,6 +20,7 @@ All notable changes to this project will be documented in this file.
 - Custom default namespace `kubel-default-namespace` with default to `"default"`
 - Better error handling
 - Buffer tracking with dired-style `q` to go back and `Q` to clean up everything.
+- Namespace listing and improved namespace selection
 
 ### Changed
 - Remove suffix "(default)" when acting on resources of StorageClasses
