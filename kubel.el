@@ -669,6 +669,9 @@ NAME is the string name of the resource."
 NAME is the string name of the resource to decribe.
 DESCRIBE is boolean to describe instead of get resource details"
   (let* ((resource (kubel--select-resource name))
+         (ctx kubel-context)
+         (ns kubel-namespace)
+         (res kubel-resource)
          (process-name (format "kubel - %s - %s" name resource))
          (callback (lambda ()
                      (set-buffer-modified-p nil)
@@ -677,7 +680,10 @@ DESCRIBE is boolean to describe instead of get resource details"
         (kubel--exec-async process-name (list "describe" name resource) nil callback)
       (kubel--exec-async process-name (list "get" name "-o" kubel-output resource) nil callback))
     (when (string-equal kubel-output "yaml")
-      (kubel-yaml-editing-mode))))
+      (kubel-yaml-editing-mode)
+      (setq kubel-context ctx)
+      (setq kubel-namespace ns)
+      (setq kubel-resource res))))
 
 (defun kubel--show-rollout-revision (type name)
   "Show a specific revision of a certain resource.
@@ -796,6 +802,9 @@ Allows simple apply of the changes made.
          (res kubel-resource)
          (process-name (format "kubel - %s - %s" kubel-resource resource))
          (callback (lambda ()
+                     (setq kubel-context ctx)
+                     (setq kubel-namespace ns)
+                     (setq kubel-resource res)
                      (set-buffer-modified-p nil)
                      (goto-char (point-min)))))
     (if describe
